@@ -14,7 +14,7 @@ class BookingController extends Controller
         $validated = $request->validate([
             'check_in_date' => 'required|date',
             'status' => 'in:confirmed,unconfirmed',
-            'user_id' => 'nullable|exists:users,id',
+            'users_id' => 'nullable|exists:users,id',
         ]);
 
         $booking = Booking::create($validated);
@@ -54,7 +54,7 @@ class BookingController extends Controller
         $validated = $request->validate([
             'check_in_date' => 'sometimes|date',
             'status' => 'sometimes|in:confirmed,unconfirmed',
-            'user_id' => 'nullable|exists:users,id',
+            'users_id' => 'nullable|exists:users,id',
         ]);
 
         $booking->update($validated);
@@ -69,12 +69,12 @@ class BookingController extends Controller
     }
 
     // 6. Получить список броней конкретного пользователя
-    public function getByUser($userId, Request $request)
+    public function getByUser($usersId, Request $request)
     {
         $limit = $request->query('limit', 10);
         $offset = $request->query('offset', 0);
 
-        $bookings = Booking::where('user_id', $userId)
+        $bookings = Booking::where('users_id', $usersId)
             ->limit($limit)
             ->offset($offset)
             ->get();

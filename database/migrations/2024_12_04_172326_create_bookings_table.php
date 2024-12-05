@@ -13,7 +13,7 @@ return new class extends Migration
             $table->timestamp('created_at')->useCurrent();
             $table->date('check_in_date');
             $table->enum('status', ['confirmed', 'unconfirmed'])->default('unconfirmed');
-            $table->foreignId('user_id')->nullable()->constrained('users')->onDelete('cascade');
+            $table->foreignId('users_id')->nullable()->constrained('users')->onDelete('cascade');
         });
     }
     public function down()

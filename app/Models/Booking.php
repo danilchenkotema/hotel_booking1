@@ -10,6 +10,7 @@ class Booking extends Model
     use HasFactory;
 
     protected $fillable = ['check_in_date', 'status', 'user_id'];
+    public $timestamps = false;
 
     public function user()
     {
